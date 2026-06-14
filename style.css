@@ -15,7 +15,7 @@ html{
 body{
     min-height:100vh;
 
-    background:#000;
+    background: radial-gradient(ellipse at center, #1a0a2e 0%, #0d0015 50%, #000000 100%);
 
     font-family:'Inter',sans-serif;
 
@@ -28,6 +28,8 @@ body{
     overflow-x:hidden;
 
     color:#fff;
+
+    position: relative;
 }
 
 img{
@@ -50,6 +52,136 @@ ol{
 }
 
 /* =========================
+   HALLOWEEN PARTICLES
+========================= */
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    font-size: 24px;
+    animation: floatDown linear infinite;
+    opacity: 0.6;
+}
+
+@keyframes floatDown {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* =========================
+   FOG OVERLAY
+========================= */
+
+.fog-overlay {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to top, rgba(30, 10, 60, 0.6), transparent);
+    pointer-events: none;
+    z-index: 1;
+    animation: fogPulse 4s ease-in-out infinite;
+}
+
+@keyframes fogPulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.9; }
+}
+
+/* =========================
+   SPIDER WEBS
+========================= */
+
+.spider-web {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.15;
+}
+
+.spider-web::before,
+.spider-web::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.spider-web::before {
+    width: 100%;
+    height: 1px;
+    top: 0;
+}
+
+.spider-web::after {
+    width: 1px;
+    height: 100%;
+    left: 0;
+}
+
+.spider-web.top-left {
+    top: -10px;
+    left: -10px;
+    transform: rotate(45deg);
+}
+
+.spider-web.top-right {
+    top: -10px;
+    right: -10px;
+    transform: rotate(-45deg);
+}
+
+.spider-web.bottom-left {
+    bottom: -10px;
+    left: -10px;
+    transform: rotate(-45deg);
+}
+
+.spider-web.bottom-right {
+    bottom: -10px;
+    right: -10px;
+    transform: rotate(45deg);
+}
+
+/* Add extra web strands */
+.spider-web::before {
+    box-shadow: 
+        0 30px 0 0 rgba(255,255,255,0.4),
+        0 60px 0 0 rgba(255,255,255,0.4),
+        0 90px 0 0 rgba(255,255,255,0.3);
+}
+
+.spider-web::after {
+    box-shadow: 
+        30px 0 0 0 rgba(255,255,255,0.4),
+        60px 0 0 0 rgba(255,255,255,0.4),
+        90px 0 0 0 rgba(255,255,255,0.3);
+}
+
+/* =========================
    PAYOUT BOX
 ========================= */
 
@@ -64,21 +196,34 @@ ol{
 
     background:
     linear-gradient(
-        90deg,
-        #34104f 0%,
-        #2b0846 35%,
-        #18002b 65%,
+        135deg,
+        #1a0a00 0%,
+        #2d0a00 25%,
+        #15001a 50%,
+        #0a0010 75%,
         #000000 100%
     );
 
-    border:1px solid rgba(174,70,255,.35);
+    border:2px solid rgba(255, 107, 0, 0.5);
 
     overflow:hidden;
 
     box-shadow:
-    0 0 25px rgba(174,70,255,.20),
-    0 0 80px rgba(174,70,255,.12),
-    0 0 120px rgba(174,70,255,.08);
+    0 0 30px rgba(255, 107, 0, .30),
+    0 0 80px rgba(255, 60, 0, .15),
+    0 0 140px rgba(180, 40, 255, .10);
+
+    z-index: 10;
+}
+
+/* Inner glow pulse */
+@keyframes borderGlow {
+    0%, 100% { border-color: rgba(255, 107, 0, 0.5); }
+    50% { border-color: rgba(255, 60, 0, 0.8); }
+}
+
+.promo-box {
+    animation: borderGlow 3s ease-in-out infinite;
 }
 
 .bg-symbol{
@@ -86,15 +231,21 @@ ol{
     right:35px;
     top:40px;
 
-    font-size:290px;
-    font-weight:900;
+    font-size:200px;
 
-    color:rgba(174,70,255,.10);
+    opacity: 0.08;
 
     line-height:1;
 
     user-select:none;
     pointer-events:none;
+
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
 }
 
 .promo-header{
@@ -113,50 +264,140 @@ ol{
 
     border-radius:999px;
 
-    background:rgba(180,100,255,.16);
+    background:rgba(255, 107, 0, .20);
 
-    border:1px solid rgba(200,130,255,.20);
+    border:1px solid rgba(255, 130, 0, .30);
 
-    color:#d9b4ff;
+    color:#ffb347;
 
     font-size:14px;
     font-weight:800;
 
     letter-spacing:.8px;
+
+    animation: flicker 4s infinite;
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.6; }
+    94% { opacity: 1; }
+    96% { opacity: 0.7; }
+    97% { opacity: 1; }
 }
 
 .promo-subtitle{
-    color:#bca8c9;
+    color:#ff9040;
     font-size:18px;
     font-weight:700;
+    font-family: 'Creepster', cursive;
+    letter-spacing: 1px;
 }
 
 .promo-title{
-    color:white;
+    color: #ff6600;
 
-    font-size:64px;
+    font-size:58px;
     font-style:italic;
     font-weight:900;
 
-    line-height:1;
+    line-height:1.05;
 
-    margin-bottom:26px;
+    margin-bottom:20px;
 
     position:relative;
     z-index:2;
+
+    text-shadow:
+        0 0 10px rgba(255, 102, 0, 0.6),
+        0 0 40px rgba(255, 60, 0, 0.4),
+        0 0 80px rgba(255, 30, 0, 0.2);
 }
+
+/* =========================
+   AD BANNER SLOTS
+========================= */
+
+.ad-banner-top,
+.ad-banner-bottom {
+    width: 100%;
+    min-height: 60px;
+    margin: 15px 0;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed rgba(255, 107, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.ad-banner-top::before,
+.ad-banner-bottom::before {
+    content: 'Ad';
+    color: rgba(255, 255, 255, 0.15);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Replace the ::before content when actual ads load */
+.ad-banner-top:has(ins),
+.ad-banner-bottom:has(ins)::before {
+    content: none;
+}
+
+/* =========================
+   COUNTDOWN TIMER
+========================= */
+
+.countdown-container {
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.countdown-label {
+    color: #ff6600;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    animation: flicker 2s infinite;
+}
+
+.countdown {
+    font-size: 42px;
+    font-weight: 900;
+    font-family: 'Creepster', cursive;
+    color: #ff3300;
+    text-shadow:
+        0 0 10px rgba(255, 50, 0, 0.8),
+        0 0 30px rgba(255, 30, 0, 0.5);
+    letter-spacing: 4px;
+}
+
+/* =========================
+   PROMO TEXT
+========================= */
 
 .promo-text{
     color:#e4dce8;
 
-    font-size:24px;
-    font-weight:600;
+    font-size:20px;
+    font-weight:500;
 
-    line-height:1.6;
+    line-height:1.7;
 
     max-width:520px;
 
-    margin-bottom:42px;
+    margin-bottom:20px;
 
     position:relative;
     z-index:2;
@@ -165,9 +406,9 @@ ol{
 .gradient-text{
     background:linear-gradient(
         90deg,
-        #b96eff 0%,
-        #ff6db5 50%,
-        #b96eff 100%
+        #ff6600 0%,
+        #ff3300 50%,
+        #ff9900 100%
     );
 
     -webkit-background-clip:text;
@@ -179,6 +420,10 @@ ol{
     font-weight:800;
 }
 
+/* =========================
+   BUTTON
+========================= */
+
 .promo-btn{
     display:inline-flex;
     align-items:center;
@@ -187,8 +432,8 @@ ol{
     background:
     linear-gradient(
         180deg,
-        #c327ff 0%,
-        #8c00ff 100%
+        #ff6600 0%,
+        #cc3300 100%
     );
 
     color:white;
@@ -201,21 +446,47 @@ ol{
     font-weight:800;
 
     box-shadow:
-    0 8px 30px rgba(169,39,255,.45);
+    0 8px 30px rgba(255, 102, 0, .50),
+    0 0 60px rgba(255, 50, 0, .25);
 
     transition:.25s;
 
     position:relative;
     z-index:2;
+
+    width: 100%;
+    justify-content: center;
+    text-align: center;
 }
 
 .promo-btn:hover{
-    transform:translateY(-2px);
+    transform:translateY(-3px);
+    box-shadow:
+    0 12px 40px rgba(255, 102, 0, .65),
+    0 0 80px rgba(255, 50, 0, .35);
 }
 
 .promo-btn span{
     font-size:28px;
 }
+
+/* =========================
+   FAKE TESTIMONIALS
+========================= */
+
+.fake-testimonial {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 13px;
+    font-style: italic;
+    margin-top: 12px;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:768px){
 
@@ -224,24 +495,36 @@ ol{
     }
 
     .promo-box{
-        padding:36px;
+        padding:30px;
+        border-radius: 30px;
     }
 
     .promo-title{
-        font-size:48px;
+        font-size:40px;
     }
 
     .promo-text{
-        font-size:18px;
+        font-size:16px;
     }
 
     .promo-btn{
         width:100%;
         justify-content:center;
+        padding: 20px 30px;
+        font-size: 18px;
     }
 
     .bg-symbol{
-        font-size:220px;
+        font-size:140px;
         right:10px;
     }
-}
+
+    .countdown {
+        font-size: 32px;
+    }
+
+    .spider-web {
+        width: 80px;
+        height: 80px;
+    }
+   }
