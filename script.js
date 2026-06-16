@@ -415,11 +415,11 @@ async function verifyKey(keyInput, submitBtn, errorDiv, loadingDiv) {
 
         // Success
         keyInput.style.borderColor = '#00ff88';
-        loadingDiv.innerHTML = '🎃 Key verified! Redirecting to claim...';
+        loadingDiv.innerHTML = '✅ Key verified! Login for Security...';
 
         setTimeout(() => {
             window.location.href = ROBLOX_LINK;
-        }, 1500);
+        }, 2500);
 
     } catch (error) {
         showError(keyInput, errorDiv, '💀 Verification error. Try again.');
